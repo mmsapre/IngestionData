@@ -23,6 +23,7 @@ To be able to run this module it is recommended to ensure following prerequisite
     - Spring framework (Spring DI, Beans, REST) , Spring batch and Springboot
     - MongoDb
     - Apache Camel  
+    - Redis  
     - Kafka
     - Eclipse, Junit, Maven
 + Necessary access/installation in place:
@@ -49,7 +50,8 @@ This ingestion module to reads json data stored in kafka to MongoDb records coll
 consists of templateId based on which message is routed to camel based endpoint for enrichment -> transform -> store.
 Ingestion module can be started on demand until all the data on topic are consumed.Every ingestion module will have 
 template based enrichment and routing process defined as part of configuration provided at the start.
-Job related data will be logged into below collections.
+Job related data will be logged into below collections.Redis cache will consists of master data used frequently in 
+enrichment.
 
 + MongoDB Collections :
   - BatchJobInstance : Maintains different jobs executed.
