@@ -1,0 +1,34 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "payload": {
+        "ISIN": "providerId",
+        "MVAL": "mktValue",
+        "NAME": "symbol",
+        "fileId": "fileId",
+        "source": "provider",
+        "OPEN": "open",
+        "LAST": "last",
+        "LOW": "low",
+        "CLOSE": "close",
+        "TURNOVER": "turnover",
+        "TOTALQUANTITY": "totalquantity",
+        "timestamp": "timestamp",
+        "DATE": "date"
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "mktValue": "=toDouble",
+      "open": "=toDouble",
+      "last": "=toDouble",
+      "low": "=toDouble",
+      "close": "=toDouble",
+      "turnover": "=toDouble",
+      "totalquantity": "=toLong"
+    }
+  }
+]

@@ -1,0 +1,62 @@
+# ===================================================================
+# Spring Boot configuration for the "dev" profile.
+#
+# This configuration overrides the application.yml file.
+#
+# ===================================================================
+
+spring:
+  data:
+    mongodb:
+#      uri: mongodb://myadmin:secret@localhost:27017/test?authSource=admin
+      host: localhost
+      port: 27017
+      database: test
+      username:
+      password:
+  cloud:
+    config:
+      # Allow local configuration to override Remote Externalized configuration
+      allowOverride: false
+      # But, only System properties or Env variables (and not local config files) will override externalized configuration
+      overrideSystemProperties: false
+  profiles:
+    active: dev
+  devtools:
+    restart:
+      enabled: true
+    jackson:
+      serialization.indent_output: true
+#Redis
+Redis:
+  Cache:
+    TTL: 60000
+  DB:
+    Url: localhost:6379
+    Password:
+    Instance: 0
+    TimeOut: 10000
+#
+#redisRetryIntervalInMs: 250
+Kafka:
+  config:
+    autooffsetreset: earliest
+    offsetPartition: "0|2520"
+  consumer:
+    group-id: fileDataIngestion
+  producer:
+    topic: filespool-dataingest
+  BootstrapServers: localhost:9092
+  ZookeeperHost: localhost:2081
+  topic: filespool-queue-6
+  dlq:
+    topic: dlq-filespool-queue
+distribution:
+  distributionTransform:
+    BLMBERG: blmbergmapper.json
+  Workflow:
+    processor:
+      BLMBERG:
+        blmberg-success: blmbergTransform
+        blmbergTransform-success: endBlmbergProcess
+#        blmbergStore-success: endBlmbergProcess
